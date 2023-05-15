@@ -7,7 +7,7 @@ The plugin version is 1.0
 Commands :
 
  - /onstaff Switches the player to "staff" mode and puts him in creative mode so that he can 
-administer the server. Person cannot throw or put items in chests (editable)
+administer the server. Person cannot throw or put items in chests (editable).
 
  - /offstaff Switches the player to "player" mode and puts them on survival so they can play 
 on the server. The person loses their administrator/moderator permissions.
