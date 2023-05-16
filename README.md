@@ -13,3 +13,6 @@ administer the server. Person cannot throw or put items in chests (editable).
 on the server. The person loses their administrator/moderator permissions.
 
 Note: This plugin works with a permissions plugin (LuckPerms) but this is editable.
+For people to be able to do these commands, you need to give them the following permissions:
+- onstaff.use
+- offstaff.use
