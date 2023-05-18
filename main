@@ -23,9 +23,10 @@ public class StaffPlugin extends JavaPlugin implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+    	
+    	Player player = (Player) sender;
 
         if (cmd.getName().equalsIgnoreCase("onstaff") && sender instanceof Player) {
-            Player player = (Player) sender;
             // Vérifie si le joueur est déjà en mode staff
             if (permissions.containsKey(player.getUniqueId())) {
                 player.sendMessage(ChatColor.RED + "Vous êtes déjà en mode staff !");
@@ -33,17 +34,10 @@ public class StaffPlugin extends JavaPlugin implements CommandExecutor {
             }
 
             // Récupère la permission et l'inventaire du grade du joueur
-            String group = getGroup(player);
             PermissionAttachment attachment = player.addAttachment(this);
             permissions.put(player.getUniqueId(), attachment);
             Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(),
-                    "lp user " + player.getName() + " group set" + group);
-            Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(),
-            		"lp user " + player.getName() + " permission unset minecraft.inventory.drop");
-            Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(),
-            		"lp user " + player.getName() + " permission unset minecraft.container.access");
-            Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(),
-            		"lp user " + player.getName() + " permission set essentials.vanish");
+                    "pex user " + player.getName() + " group set " + getGroup(player));
 
             inventories.put(player.getUniqueId(), player.getInventory().getContents());
             player.getInventory().clear();
@@ -52,9 +46,9 @@ public class StaffPlugin extends JavaPlugin implements CommandExecutor {
             player.sendMessage(ChatColor.GREEN + "Vous êtes maintenant en mode staff !");
             return true;
         }
+        
 
         if (cmd.getName().equalsIgnoreCase("offstaff") && sender instanceof Player) {
-            Player player = (Player) sender;
             // Vérifie si le joueur est en mode staff
             if (!permissions.containsKey(player.getUniqueId())) {
                 player.sendMessage(ChatColor.RED + "Vous n'êtes pas en mode staff !");
@@ -65,14 +59,7 @@ public class StaffPlugin extends JavaPlugin implements CommandExecutor {
             player.removeAttachment(permissions.get(player.getUniqueId()));
             permissions.remove(player.getUniqueId());
             Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(),
-                    "lp user " + player.getName() + " group set " + getGroup(player));
-            Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(),
-            		"lp user " + player.getName() + " permission set minecraft.inventory.drop");
-            Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(),
-            		"lp user " + player.getName() + " permission set minecraft.container.access");
-            Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(),
-            		"lp user " + player.getName() + " permission unset essentials.vanish");
-
+                    "pex user " + player.getName() + " group set default");
             player.getInventory().clear();
             ItemStack[] inventoryContents = inventories.get(player.getUniqueId());
             if (inventoryContents != null) {
@@ -87,6 +74,7 @@ public class StaffPlugin extends JavaPlugin implements CommandExecutor {
         return false;
     }
 
+    
     private void giveStaffItems(Player player) {
         // Ajoute des items au joueur en mode staff
         player.getInventory().addItem(new ItemStack(Material.DIAMOND_SWORD));
@@ -97,17 +85,17 @@ public class StaffPlugin extends JavaPlugin implements CommandExecutor {
         // Retourne le nom du groupe correspondant au grade du joueur
         if (player.isOp()) {
             return "adminisateur";
-        } else if (player.hasPermission("group.administrateur")) {
+        } else if (player.getName().equalsIgnoreCase("Pseudo_Example") || player.getName().equalsIgnoreCase("Example")) {
             return "administrateur";
-        } else if (player.hasPermission("group.responsable")) {
+        } else if (player.getName().equalsIgnoreCase("Example")) {
             return "responsable";
-        } else if (player.hasPermission("group.super_moderateur")) {
+        } else if (player.getName().equalsIgnoreCase("Example")) {
         	return "super_moderateur";
-        } else if (player.hasPermission("group.moderateur")) {
+        } else if (player.getName().equalsIgnoreCase("Example")) {
         	return "moderateur";
-        } else if (player.hasPermission("group.developpeur")) {
+        } else if (player.getName().equalsIgnoreCase("Example")) {
         	return "developpeur";
-        } else if (player.hasPermission("group.buildeur")) {
+        } else if (player.getName().equalsIgnoreCase("Example")) {
         	return "buildeur";
         } else return "default" ;
     }
