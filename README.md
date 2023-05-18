@@ -12,7 +12,7 @@ administer the server. Person cannot throw or put items in chests (editable).
  - /offstaff Switches the player to "player" mode and puts them on survival so they can play 
 on the server. The person loses their administrator/moderator permissions.
 
-Note: This plugin works with a permissions plugin (LuckPerms) but this is editable.
+Note: This plugin works with a permissions plugin (PermissionsEx) but this is editable.
 For people to be able to do these commands, you need to give them the following permissions:
 - onstaff.use
 - offstaff.use
