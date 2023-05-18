@@ -16,3 +16,5 @@ Note: This plugin works with a permissions plugin (LuckPerms) but this is editab
 For people to be able to do these commands, you need to give them the following permissions:
 - onstaff.use
 - offstaff.use
+- 
+For the plugin to know the original group of permissions of the player, it must be entered in the Main class.
